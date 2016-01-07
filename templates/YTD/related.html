@@ -1,16 +1,15 @@
-<p>Related Videos</p>
 <div class="list-group">
+    <h4 class="list-group-item-heading">Related Videos</h4>
     {% if videos %}
         {% for video in videos %}
         <button type="button" class="list-group-item select_related_video" data-videoId="{{ video.videoId }}" >
             <div class="row">
-                <div class="col-md-3">
-                    <img src="https://i.ytimg.com/vi/{{video.videoId}}/mqdefault.jpg" width="70px" height="40px">
+                <div class="col-md-5">
+                    <img src="https://i.ytimg.com/vi/{{video.videoId}}/mqdefault.jpg" width="100%" height="auto">
                 </div>
-                <div class="col-md-9">
-                    <p class="list-group-item-heading">{{ video.title }}</p>
-                    {{ video.duration }}  -  {{ video.viewCount }} views
-{#                    <p class="list-group-item-text">{{ video.description }}</p>#}
+                <div class="col-md-7">
+                    <p class="list-group-item-heading" style="font-size: 10pt;">{{ video.title }}</p>
+                    <p style="font-size: 8pt;">{{ video.duration }}  -  {{ video.viewCount }} views</p>
                 </div>
             </div>
         </button>

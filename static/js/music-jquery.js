@@ -26,5 +26,11 @@ $(document).ready(function(){
 
     $("#basic-addon2").click(function(){
         document.forms["form"].submit();
+    }).hover(function(){
+        $(this).css("font-weight", "bold");
+    }, function(){
+        $(this).css("font-weight", "normal");
     });
+
+
 });
