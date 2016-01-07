@@ -3,5 +3,30 @@
 {% block title %} Index {% endblock %}
 
 {% block body_block %}
-    <h1> Hello, World! </h1>
+    <form class="form-inline" method="post" action="/">
+        {% csrf_token %}
+        <input class="form-control" type="text" size="96" value="" id="query" name="query" placeholder="Search YouTube">
+        <input class="btn btn-primary" type="submit" name="submit" value="Search">
+    </form>
+
+    <br>
+
+    <div class="list-group">
+    {% if videos %}
+        {% for video in videos %}
+        <button type="button" class="list-group-item video_link" data-url="{{ video.videoId }}" >
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="https://i.ytimg.com/vi/{{video.videoId}}/mqdefault.jpg" width="150px" height="95px">
+                </div>
+                <div class="col-md-9">
+                    <h5 class="list-group-item-heading">{{ video.title }}</h5>
+                    {{ video.duration }}  -  {{ video.viewCount }} views
+                    <p class="list-group-item-text">{{ video.description }}</p>
+                </div>
+            </div>
+        </button>
+        {% endfor %}
+    {% endif %}
+    </div>
 {% endblock %}
