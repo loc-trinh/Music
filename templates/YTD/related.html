@@ -1,0 +1,19 @@
+<p>Related Videos</p>
+<div class="list-group">
+    {% if videos %}
+        {% for video in videos %}
+        <button type="button" class="list-group-item select_related_video" data-videoId="{{ video.videoId }}" >
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="https://i.ytimg.com/vi/{{video.videoId}}/mqdefault.jpg" width="70px" height="40px">
+                </div>
+                <div class="col-md-9">
+                    <p class="list-group-item-heading">{{ video.title }}</p>
+                    {{ video.duration }}  -  {{ video.viewCount }} views
+{#                    <p class="list-group-item-text">{{ video.description }}</p>#}
+                </div>
+            </div>
+        </button>
+        {% endfor %}
+    {% endif %}
+</div>

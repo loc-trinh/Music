@@ -3,18 +3,20 @@
 {% block title %} Index {% endblock %}
 
 {% block body_block %}
-    <form class="form-inline" method="post" action="/">
+    <form method="post" action="/" id="form">
         {% csrf_token %}
-        <input class="form-control" type="text" size="96" value="" id="query" name="query" placeholder="Search YouTube">
-        <input class="btn btn-primary" type="submit" name="submit" value="Search">
+        <div class="input-group">
+            <input type="text" class="form-control" name="query" id="query" placeholder="Search YouTube...">
+            <span class="input-group-addon" id="basic-addon2" style="cursor: pointer;">Search</span>
+        </div>
     </form>
-
     <br>
+    <div id="player" style="display: none;"></div>
 
     <div class="list-group">
     {% if videos %}
         {% for video in videos %}
-        <button type="button" class="list-group-item video_link" data-url="{{ video.videoId }}" >
+        <button type="button" class="list-group-item select_video" data-videoId="{{ video.videoId }}" >
             <div class="row">
                 <div class="col-md-3">
                     <img src="https://i.ytimg.com/vi/{{video.videoId}}/mqdefault.jpg" width="150px" height="95px">

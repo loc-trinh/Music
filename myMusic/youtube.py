@@ -52,7 +52,7 @@ def get_related_videos(videoId):
     results = []
 
     for search_result in search_response.get("items", []):
-        video = {"title": search_result["snippet"]["title"], "description": search_result["snippet"]["description"],
+        video = {"title": search_result["snippet"]["title"][:30]+"...", "description": search_result["snippet"]["description"],
                  "videoId": search_result["id"]["videoId"]}
         results.append(video)
 
