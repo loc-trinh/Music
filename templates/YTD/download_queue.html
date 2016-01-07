@@ -1,0 +1,9 @@
+<ul class="list-group">
+    <h4 class="list-group-item-heading">Download Queue</h4>
+    {% for song in songs %}
+    <li class="list-group-item">
+        {{ song.name }}<br>
+        Save to: {{ song.playlist.name }}
+    </li>
+    {% endfor %}
+</ul>

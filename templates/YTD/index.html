@@ -12,11 +12,25 @@
     </form>
     <br>
     <div id="player" style="display: none;"></div>
+    <div style="display: none;" id="add_form">
+        <form class="form-inline" id="add_to_queue" data-videoId="" data-title="">
+            <div class="form-group">
+            <label for="playlist_select">Playlist: </label>
+            <select class="form-control" id="playlist_select">
+                {% for playlist in playlists %}
+                    <option>{{ playlist.name }}</option>
+                {% endfor %}
+            </select>
+            </div>
+            <input class="btn btn-default" type="submit" value="Download">
+        </form>
+        <br>
+    </div>
 
-    <div class="list-group">
     {% if videos %}
+    <div class="list-group">
         {% for video in videos %}
-        <button type="button" class="list-group-item select_video" data-videoId="{{ video.videoId }}" >
+        <button type="button" class="list-group-item select_video" data-videoId="{{ video.videoId }}" data-title="{{ video.title }}">
             <div class="row">
                 <div class="col-xs-4 col-md-3">
                     <img src="https://i.ytimg.com/vi/{{video.videoId}}/mqdefault.jpg" width="100%" height="auto">
@@ -29,6 +43,22 @@
             </div>
         </button>
         {% endfor %}
-    {% endif %}
     </div>
+    {% endif %}
+{% endblock %}
+
+{% block side_block %}
+    <ul class="list-group">
+        <h4 class="list-group-item-heading">Download Queue</h4>
+        {% if songs %}
+            {% for song in songs %}
+            <li class="list-group-item">
+                {{ song.name }}<br>
+                Save to: {{ song.playlist.name }}
+            </li>
+            {% endfor %}
+        {% else %}
+            No songs in download queue.
+        {% endif %}
+    </ul>
 {% endblock %}

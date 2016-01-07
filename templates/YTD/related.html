@@ -2,7 +2,7 @@
     <h4 class="list-group-item-heading">Related Videos</h4>
     {% if videos %}
         {% for video in videos %}
-        <button type="button" class="list-group-item select_related_video" data-videoId="{{ video.videoId }}" >
+        <button type="button" class="list-group-item select_related_video" data-videoId="{{ video.videoId }}" data-title="{{ video.title }}">
             <div class="row">
                 <div class="col-md-5">
                     <img src="https://i.ytimg.com/vi/{{video.videoId}}/mqdefault.jpg" width="100%" height="auto">

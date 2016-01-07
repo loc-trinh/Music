@@ -1,3 +1,14 @@
 from django.contrib import admin
+from myMusic.models import Playlist, Song
 
-# Register your models here.
+
+class PlaylistAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+
+
+class SongAdmin(admin.ModelAdmin):
+    list_display = ('name', 'playlist', 'url')
+
+
+admin.site.register(Playlist, PlaylistAdmin)
+admin.site.register(Song, SongAdmin)
