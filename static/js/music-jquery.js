@@ -47,11 +47,13 @@ $(document).ready(function(){
     $("#add_to_queue").on("submit", function(e){
         e.preventDefault();
         $("#add_form").hide();
+        $("#loading").slideDown();
         var videoId = $(this).attr("data-videoId");
         var title = $(this).attr("data-title");
         var playlist = $("#playlist_select").val();
         $.get("/add_to_queue/", {"videoId": videoId, "playlist": playlist, "title": title}, function(data){
             $("#download_queue").html(data);
+            $("#loading").slideUp();
         });
     });
 });

@@ -39,7 +39,7 @@ def add_to_queue(request):
         song.save()
         download(request.GET["videoId"], request.GET["playlist"], request.GET["title"])
         songs = Song.objects.all()
-        if len(songs) > 8:
+        if len(songs) > 6:
             songs[0].delete()
 
     return render(request, "YTD/download_queue.html", {"songs": Song.objects.all()})
