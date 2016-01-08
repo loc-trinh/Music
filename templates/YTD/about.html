@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %} About {% endblock %}
+
+{% block body_block %}
+    <div class="page-header">
+        <h3>About</h3>
+    </div>
+    <p>"Music can change the world because it can change people."</p>
+    <a href="{% url "index" %}">Find more.</a>
+{% endblock %}

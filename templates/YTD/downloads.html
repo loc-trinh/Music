@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %} Downloads {% endblock %}
+
+{% block body_block %}
+<div class="page-header">
+    <h3>Downloads</h3>
+</div>
+
+<h3 style="display: none;" id="loading">Downloading...</h3>
+
+<div class="list-group">
+    {% if songs %}
+        {% for song in songs %}
+        <button type="button" class="list-group-item download_link" data-videoId="{{ song.url }}" data-playlist="{{ song.playlist.slug }}" data-title="{{ song.name }}">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="list-group-item-heading">{{ song.name}}</h5>
+                    <p class="list-group-item-text">Save to: {{ song.playlist.name }}</p>
+                </div>
+            </div>
+        </button>
+        {% endfor %}
+    {% else %}
+        No songs in download queue.
+    {% endif %}
+</div>
+{% endblock %}

@@ -54,5 +54,4 @@ $(document).ready(function(){
             $("#download_queue").html(data);
         });
     });
-
 });

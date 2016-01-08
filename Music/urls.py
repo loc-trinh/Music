@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^player/$', views.player, name="player"),
     url(r'^related_videos/$', views.related_videos, name="related_videos"),
     url(r'^add_to_queue/$', views.add_to_queue, name="add_to_queue"),
+    url(r'^about/$', views.about, name="about"),
 )

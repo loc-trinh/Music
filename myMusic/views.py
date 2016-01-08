@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from youtube import run_query, get_related_videos
 from myMusic.models import Playlist, Song
+from download import download
 
 
 def index(request):
@@ -37,5 +37,13 @@ def add_to_queue(request):
         song = Song.objects.get_or_create(playlist=playlist, name=request.GET["title"])[0]
         song.url = request.GET["videoId"]
         song.save()
+        download(request.GET["videoId"], request.GET["playlist"], request.GET["title"])
+        songs = Song.objects.all()
+        if len(songs) > 8:
+            songs[0].delete()
 
     return render(request, "YTD/download_queue.html", {"songs": Song.objects.all()})
+
+
+def about(request):
+    return render(request, "YTD/about.html", {})
