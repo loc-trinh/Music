@@ -10,6 +10,7 @@ def index(request):
         query = request.POST["query"]
         context["videos"] = run_query(query)
         context["playlists"] = Playlist.objects.all()
+        context["query"] = query
     songs = Song.objects.all()
     if len(songs) > 0:
         context["songs"] = songs

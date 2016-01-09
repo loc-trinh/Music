@@ -6,7 +6,11 @@
     <form method="post" action="/" id="form">
         {% csrf_token %}
         <div class="input-group">
-            <input type="text" class="form-control" name="query" id="query" placeholder="Search YouTube...">
+            {% if query %}
+                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" class="form-control" name="query" id="query" value="{{ query }}">
+            {% else %}
+                <input autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" class="form-control" name="query" id="query" placeholder="Search YouTube...">
+            {% endif %}
             <span class="input-group-addon" id="basic-addon2" style="cursor: pointer;">Search</span>
         </div>
     </form>
