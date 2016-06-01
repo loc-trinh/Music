@@ -14,13 +14,16 @@ def run_query(query):
         q=query,
         part="id,snippet",
         maxResults=50,
-        type="video",
+        type="video,playlist",
 
     ).execute()
 
     video_ids = []
     for search_result in search_response.get("items", []):
-        video_ids.append(search_result["id"]["videoId"])
+        if search_result["id"]["kind"] == "youtube#video": 
+            video_ids.append(search_result["id"]["videoId"])
+        elif search_result["id"]["kind"] == "youtube#playlist":
+            video_ids.append(search_result["id"]["playlistId"])
     video_response = youtube.videos().list(
         id=','.join(video_ids),
         part='contentDetails, statistics'
@@ -29,8 +32,12 @@ def run_query(query):
     results = []
 
     for (search_result, video_result) in zip(search_response.get("items", []), video_response.get("items", [])):
-        video = {"title": search_result["snippet"]["title"], "description": search_result["snippet"]["description"],
+        if search_result["id"]["kind"] == "youtube#video": 
+            video = {"title": search_result["snippet"]["title"], "description": search_result["snippet"]["description"],
                  "videoId": search_result["id"]["videoId"]}
+        elif search_result["id"]["kind"] == "youtube#playlist": 
+            video = {"title": search_result["snippet"]["title"], "description": search_result["snippet"]["description"],
+                 "videoId": search_result["id"]["playlistId"]}
         time = re.search(r'PT(\d+H)?(\d+M)?(\d+S)?',video_result["contentDetails"]["duration"])
         video["duration"] = ':'.join([time.group(i)[:-1].zfill(2) for i in range(1,4) if time.group(i)])
         video["viewCount"] = locale.format("%d", int(video_result["statistics"]["viewCount"]), grouping=True)
