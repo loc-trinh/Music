@@ -1,7 +1,7 @@
 from apiclient.discovery import build
 import locale, re, API_KEY
 
-locale.setlocale(locale.LC_ALL, 'en_US')
+locale.setlocale(locale.LC_ALL, 'en_US.utf8')
 
 DEVELOPER_KEY = API_KEY.key
 YOUTUBE_API_SERVICE_NAME = "youtube"
